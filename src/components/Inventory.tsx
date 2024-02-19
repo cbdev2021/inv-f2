@@ -78,7 +78,7 @@ function filterRecordsByMonthAndYear(records: any[], targetMonth: number, target
 }
 
 type Record = {
-    _id: string;
+    id: string;
     tipoRegistro: string;
     descRegistro: string;
     fecha: string;
@@ -119,7 +119,7 @@ const Inventory: FunctionComponent = () => {
 
 
     // console.log("userInfo");
-    // console.log(useSelector((state: any) => state.auth.userInfo._id));
+    // console.log(useSelector((state: any) => state.auth.userInfo.id));
     const { data: dataResponseRegisters, isLoading, refetch } = useGetProductsByUserIdQuery({
         data: {
             idUsuario: userId
@@ -142,15 +142,15 @@ const Inventory: FunctionComponent = () => {
     //     if (dataResponse) {
     //         const spentDataMapped = dataResponse
     //             .filter((item: { typevalue: string; }) => item.typevalue === 'Spent')
-    //             .map((item: { _id: string; subtype: any; }) => ({
-    //                 _id: item._id,
+    //             .map((item: { id: string; subtype: any; }) => ({
+    //                 id: item.id,
     //                 subtype: item.subtype
     //             }));
 
     //         const incomeDataMapped = dataResponse
     //             .filter((item: { typevalue: string; }) => item.typevalue === 'Income')
-    //             .map((item: { _id: string; subtype: any; }) => ({
-    //                 _id: item._id,
+    //             .map((item: { id: string; subtype: any; }) => ({
+    //                 id: item.id,
     //                 subtype: item.subtype
     //             }));
 
@@ -215,7 +215,7 @@ const Inventory: FunctionComponent = () => {
     //     setDialogTitle(title);
     //     setOpenDialog(true);
     //     setrowId(rowId);
-    //     const itemToUpdate = dataResponseRegisters.find((item: { _id: string; }) => item._id === rowId);
+    //     const itemToUpdate = dataResponseRegisters.find((item: { id: string; }) => item.id === rowId);
     //     console.log("Add register itemToUpdate: ");
     //     console.log(itemToUpdate);
     //     setItemToUpdate(itemToUpdate);
@@ -232,7 +232,7 @@ const Inventory: FunctionComponent = () => {
     //     setrowId(rowId);
 
     //     try {
-    //         const itemToUpdate = dataResponseRegisters.find((item: { _id: string; }) => item._id === rowId);
+    //         const itemToUpdate = dataResponseRegisters.find((item: { id: string; }) => item.id === rowId);
     //         setItemToUpdate(itemToUpdate);
 
     //         // Refrescar los datos antes de acceder a dataResponseRegisters
@@ -255,8 +255,8 @@ const Inventory: FunctionComponent = () => {
         setOpenDialog(true);
         setrowId(rowId);
 
-        const itemToUpdate = dataResponseRegisters.find((item: { _id: string; }) => item._id === rowId);  //nodejs
-        // const itemToUpdate = dataResponseRegisters.find((item: { _id: string; }) => item.id === rowId); //spring boot
+        const itemToUpdate = dataResponseRegisters.find((item: { id: string; }) => item.id === rowId);  //nodejs
+        // const itemToUpdate = dataResponseRegisters.find((item: { id: string; }) => item.id === rowId); //spring boot
 
         setItemToUpdate(itemToUpdate);
 
@@ -412,7 +412,7 @@ const Inventory: FunctionComponent = () => {
                                     filteredRecords.map((row: any) => ( */}
                                 {dataResponseRegisters && dataResponseRegisters.length > 0 ? (
                                     dataResponseRegisters.map((row: any) => (
-                                        <TableRow key={row._id}>
+                                        <TableRow key={row.id}>
                                             <TableCell>{row.productId}</TableCell>
                                             <TableCell>{row.name}</TableCell>
                                             <TableCell>{row.description}</TableCell>
@@ -424,14 +424,14 @@ const Inventory: FunctionComponent = () => {
                                                     aria-label="edit"
                                                     onClick={() => {
                                                         handleCloseRegisters();
-                                                        handleEdit("Edit Register", row._id);
+                                                        handleEdit("Edit Register", row.id);
                                                     }}
                                                 >
                                                     <EditIcon color="primary" />
                                                 </IconButton>
                                                 <IconButton
                                                     aria-label="delete"
-                                                    //onClick={() => handleDelete(row._id)} //node js
+                                                    //onClick={() => handleDelete(row.id)} //node js
                                                     onClick={() => handleDelete(row.id)} //spring boot
                                                 >
                                                     <DeleteIcon color="secondary" />

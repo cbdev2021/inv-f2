@@ -42,7 +42,7 @@ interface TableConfigProps {
   userId: string;
   title: string;
   data: {
-    _id: string;
+    id: string;
     subtype: string;
   }[];
   typevalue: string;
@@ -140,7 +140,7 @@ const TableAddRegister: FunctionComponent<TableConfigProps> = ({
 
   // const handleEdit = (id: string) => {
   //   setEditingId(id);
-  //   const currentItem = data.find((item) => item._id === id);
+  //   const currentItem = data.find((item) => item.id === id);
   //   if (currentItem) {
   //     setNewSubtype(currentItem.subtype);
   //     setOriginalSubtype(currentItem.subtype);
@@ -171,8 +171,8 @@ const TableAddRegister: FunctionComponent<TableConfigProps> = ({
         token: token,
       });
 
-      const newId = response.data._id;
-      const newItem = { _id: newId, subtype: addNewSubtype, typevalue: typevalue };
+      const newId = response.data.id;
+      const newItem = { id: newId, subtype: addNewSubtype, typevalue: typevalue };
       const updatedData = [...data, newItem];
       setAddNewSubtype("");
       updateData(updatedData, typevalue);
@@ -255,7 +255,7 @@ const TableAddRegister: FunctionComponent<TableConfigProps> = ({
     try {
       console.log("itemToUpdate");
       console.log(itemToUpdate);
-      console.log(itemToUpdate._id);
+      console.log(itemToUpdate.id);
 
       if (!itemToUpdate) {
         console.error("Elemento no encontrado para actualizar");
@@ -272,11 +272,11 @@ const TableAddRegister: FunctionComponent<TableConfigProps> = ({
 
       console.log("updatedItem:");
       console.log(updatedItem);
-      console.log(itemToUpdate._id);
+      console.log(itemToUpdate.id);
 
       await updateTypeValue(
         {
-          id: itemToUpdate._id,
+          id: itemToUpdate.id,
           registro: updatedItem,
           token: token
         }
