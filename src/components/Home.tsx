@@ -29,6 +29,12 @@ const Home: FunctionComponent = () => {
         token: token,
     });
 
+    //solo en spring boot // probar en caso de sumar mal en home
+    
+    // useEffect(() => {
+    // }, [userId, token]); // Dependencias del useEffect
+
+
     const months = [
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -60,7 +66,7 @@ const Home: FunctionComponent = () => {
 
     type Record = {
         totalSales: number;
-        _id: string;
+        id: string;                 //TESTEAR HOME Y REPORTS A LA VUELTA !!!
         idUsuario: string;
         invoiceType: string;
         invoiceID: number;
