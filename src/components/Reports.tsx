@@ -28,6 +28,12 @@ const Reports: FunctionComponent = () => {
         token: token,
     });
 
+    //solo spring boot
+    useEffect(() => {
+        // console.log("dataResponseRegisters" + dataResponseRegisters + "  lenght: " + dataResponseRegisters.lenght);
+        // console.log(dataResponseRegisters);
+    }, [dataResponseRegisters]);
+
     const months = [
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -57,7 +63,7 @@ const Reports: FunctionComponent = () => {
 
     type Record = {
         totalSales: number;
-        _id: string;
+        id: string;
         idUsuario: string;
         invoiceType: string;
         invoiceID: number;
@@ -317,7 +323,7 @@ const Reports: FunctionComponent = () => {
                     Monthly Period
                 </Typography>
 
-                <Box display="flex" alignItems="center" justifyContent="center">  
+                <Box display="flex" alignItems="center" justifyContent="center">
                     <ShoppingCartIcon />
                     <Switch
                         checked={filterByType === 'Sales'}
@@ -326,7 +332,7 @@ const Reports: FunctionComponent = () => {
                         inputProps={{ 'aria-label': 'toggle type filter' }}
                     />
                     <PaidIcon />
-                    
+
                 </Box>
 
                 <Box display="flex" alignItems="center" justifyContent="center">
