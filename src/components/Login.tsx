@@ -18,6 +18,12 @@ const Login: FunctionComponent = () => {
   //const { userInfo } = useSelector((state: any) => state.auth);
   const userInfo = useSelector((state: any) => state);
 
+  useEffect(() => {
+    if (userInfo.auth.token) {
+      navigate('/home'); 
+    }
+  }, [userInfo.token, navigate]);
+
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
