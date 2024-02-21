@@ -30,9 +30,10 @@ const Home: FunctionComponent = () => {
     });
 
     //solo en spring boot // probar en caso de sumar mal en home
-    
+
     // useEffect(() => {
-    // }, [userId, token]); // Dependencias del useEffect
+    //     console.log(dataResponseRegisters);
+    // }, [dataResponseRegisters, userId, token]);
 
 
     const months = [
@@ -595,7 +596,7 @@ const Home: FunctionComponent = () => {
                             margin={margin}
                         />
                     )}
-              
+
                     <h4 style={{ fontWeight: 'bold', textAlign: 'left', marginBottom: '5px' }}>{"Purchases per year"}</h4>
                     {isChartDataEmptyPurchase ? (
                         <div style={{ minWidth: '400px', minHeight: '240px' }}>
