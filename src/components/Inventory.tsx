@@ -266,10 +266,10 @@ const Inventory: FunctionComponent = () => {
             console.log("Data refetched successfully.");
         };
 
-        const dataEdit =
-            itemToUpdate.tipoRegistro === "Spent" ? spentData :
-                itemToUpdate.tipoRegistro === "Income" ? incomeData :
-                    [];
+        // const dataEdit =
+        //     itemToUpdate.tipoRegistro === "Spent" ? spentData :
+        //         itemToUpdate.tipoRegistro === "Income" ? incomeData :
+        //             [];
 
         // Pasa la función refetch al componente hijo
         // setDataEdit({ dataEdit, refetchFunction });
@@ -425,7 +425,7 @@ const Inventory: FunctionComponent = () => {
                                                     onClick={() => {
                                                         handleCloseRegisters();
                                                         handleEdit("Edit Register", row.id);
-                                                    }}
+                                                                                                            }}
                                                 >
                                                     <EditIcon color="primary" />
                                                 </IconButton>
