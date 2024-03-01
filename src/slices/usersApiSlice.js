@@ -18,7 +18,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
     register: builder.mutation({
       query: (data) => ({
-        url: `${USERS_URL}`,
+        url: `${USERS_URL}/register`,
         method: 'POST',
         body: data,
       }),
@@ -30,11 +30,22 @@ export const userApiSlice = apiSlice.injectEndpoints({
     //     method: 'PUT',
     //     body: data,
     //   }),
+    // }), 
+
+    // updateUser: builder.mutation({
+    //   query: (data, token) => ({
+    //     url: `${USERS_URL}/profile`,
+    //     method: 'PUT',
+    //     body: data,
+    //     headers: {
+    //       Authorization: `Bearer ${data.token}`,
+    //     },
+    //   }),
     // }),
 
     updateUser: builder.mutation({
       query: (data, token) => ({
-        url: `${USERS_URL}/profile`,
+        url: `${USERS_URL}/update-profile/${data.id}`,
         method: 'PUT',
         body: data,
         headers: {

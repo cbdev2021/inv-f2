@@ -54,7 +54,7 @@ const Profile = () => {
 
 
         const res = await updateProfile({
-          _id: userInfo._id,
+          id: userInfo._id,
           name,
           email,
           password,
