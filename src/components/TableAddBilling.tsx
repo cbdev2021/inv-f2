@@ -136,7 +136,9 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
     itemToUpdate && typevalue === "View" ? itemToUpdate.paymentBuy : ""
   );
 
-  const paymentSellOptions = ['efectivo', 'tarjeta de crédito', 'tarjeta de débito', 'cheque', 'pago en línea'];
+  // const paymentSellOptions = ['efectivo', 'tarjeta de crédito', 'tarjeta de débito', 'cheque', 'pago en línea'];
+  const paymentSellOptions = ['💵 Cash', '💳 Credit Card', '💳 Debit Card', '📝 Check', '🖥️ Online Payment'];
+ 
   const [invoiceId, setInvoiceId] = useState(
     itemToUpdate && typevalue === "View" ? itemToUpdate.invoiceID : ""
   );
