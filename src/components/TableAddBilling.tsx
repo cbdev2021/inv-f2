@@ -635,7 +635,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
       <div>
         <Typography variant="h6" gutterBottom>
           {/* Add {title}   {title} Invoice      {/* {itemToUpdate.invoiceType} Invoice //new invoice */}
-          {itemToUpdate ? "📋" +itemToUpdate.invoiceType + ' Invoice' : `${title} Invoice`}
+          {itemToUpdate ? "📋" + itemToUpdate.invoiceType + ' Invoice' : `${title} Invoice`}
         </Typography>
         <br />
 
@@ -916,9 +916,9 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
               style={{ display: isAutocompleteDisabled ? 'none' : 'block' }}
             />
           )}
-        /> 
+        />
       </Grid>
- 
+
       {/* <Button variant="contained" color="primary" onClick={handleSearch}>
         Search
       </Button> */}
@@ -934,7 +934,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
       <br />
       <div style={{ marginTop: '20px' }}>
         <Typography variant="h6" gutterBottom>
-        🛒 Product list
+          🛒 Product list
         </Typography>
         <TableContainer component={Paper}>
           <Table>
@@ -1006,7 +1006,12 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
 
         fullWidth
         sx={{ marginTop: 2 }}
-      //disabled={!selectedProduct}
+        //disabled={!selectedProduct} 
+        style={{
+          marginTop: 2,
+          display: isReadOnly ? 'none' : 'block'  // Ocultar si isReadOnly es true
+        }}
+
       >
         Generar Factura
       </Button>
