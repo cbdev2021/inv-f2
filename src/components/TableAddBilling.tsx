@@ -22,6 +22,7 @@ import {
   IconButton,
   DialogActions,
   CircularProgress,
+  Input,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
@@ -138,7 +139,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
 
   // const paymentSellOptions = ['efectivo', 'tarjeta de crédito', 'tarjeta de débito', 'cheque', 'pago en línea'];
   const paymentSellOptions = ['💵 Cash', '💳 Credit Card', '💳 Debit Card', '📝 Check', '🖥️ Online Payment'];
- 
+
   const [invoiceId, setInvoiceId] = useState(
     itemToUpdate && typevalue === "View" ? itemToUpdate.invoiceID : ""
   );
@@ -634,7 +635,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
       <div>
         <Typography variant="h6" gutterBottom>
           {/* Add {title}   {title} Invoice      {/* {itemToUpdate.invoiceType} Invoice //new invoice */}
-          {itemToUpdate ? itemToUpdate.invoiceType + ' Invoice' : `${title} Invoice`}
+          {itemToUpdate ? "📋" +itemToUpdate.invoiceType + ' Invoice' : `${title} Invoice`}
         </Typography>
         <br />
 
@@ -665,7 +666,8 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
 
             <TextField
               label="Invoice ID"
-              variant="outlined"
+              // variant="outlined"
+              variant="standard"
               type="text"
               value={invoiceId}
               fullWidth
@@ -675,7 +677,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
             />
           </Grid>
           {/* DatePicker */}
-          <Grid item xs={6} >
+          {/* <Grid item xs={6} >
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Select Date"
@@ -686,15 +688,36 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
                     //setFecha(newValue.format('YYYY-MM-DD'));
                   }
                 }}
+                disabled={isReadOnly} 
+              />
+            </LocalizationProvider>
+          </Grid> */}
+
+          {/* DatePicker */}
+          <Grid item xs={6}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Select Date"
+                value={dayjs(dateIssue)}
+                onChange={(newValue) => {
+                  if (newValue !== null) {
+                    setDateIssue(newValue.format('MM-DD-YYYY'));
+                  }
+                }}
                 disabled={isReadOnly}
+                // inputFormat="MM-DD-YYYY" // Formato del input
+                components={{
+                  TextField: (props) => <TextField {...props} variant="standard" /> // Forzamos el estilo standard
+                }}
               />
             </LocalizationProvider>
           </Grid>
+
           <Grid item xs={6}>
             {(typevalue === 'Purchase' || (itemToUpdate && (typevalue === 'View' && itemToUpdate.invoiceType === 'Purchase'))) && (
               <TextField
                 label="Provider"
-                variant="outlined"
+                variant="standard"
                 type="text"
                 value={provider || ""}
                 fullWidth
@@ -706,7 +729,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
             )}
           </Grid>
 
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}>
             {(typevalue === 'Purchase' || (itemToUpdate && (typevalue === 'View' && itemToUpdate.invoiceType === 'Purchase'))) && (
               <FormControl fullWidth>
                 <InputLabel id="paymentSell-label">Payment Buy</InputLabel>
@@ -728,13 +751,39 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
                 </Select>
               </FormControl>
             )}
+          </Grid> */}
+
+          <Grid item xs={6}>
+            {(typevalue === 'Purchase' || (itemToUpdate && (typevalue === 'View' && itemToUpdate.invoiceType === 'Purchase'))) && (
+              <FormControl fullWidth>
+                <InputLabel id="paymentSell-label">Payment Buy</InputLabel>
+                <Select
+                  labelId="paymentSell-label"
+                  id="paymentSell"
+                  value={paymentBuy}
+                  onChange={handlePaymentBuyChange}
+                  label="Payment Buy"
+                  inputProps={{
+                    readOnly: isReadOnly, // Utiliza inputProps para aplicar readOnly
+                  }}
+                  // Cambiar el Input aquí para usar variante "standard"
+                  input={<Input />}
+                >
+                  {paymentSellOptions.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            )}
           </Grid>
 
           <Grid item xs={6}>
             {(typevalue === 'Sales' || (itemToUpdate && (typevalue === 'View' && itemToUpdate.invoiceType === 'Sales'))) && (
               <TextField
                 label="Customer"
-                variant="outlined"
+                variant="standard"
                 type="text"
                 value={customer || ""}
                 fullWidth
@@ -754,6 +803,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
                   labelId="paymentSell-label"
                   id="paymentSell"
                   value={paymentSell}
+                  variant="standard"
                   onChange={handlePaymentSellChange}
                   label="Payment Sell"
                   inputProps={{
@@ -797,7 +847,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
               <Grid item xs={6}>
                 <TextField
                   label="Taxes"
-                  variant="outlined"
+                  variant="standard"
                   type="text"
                   value={taxes || ""}
                   fullWidth
@@ -811,7 +861,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
               <Grid item xs={6}>
                 <TextField
                   label="Sub Total"
-                  variant="outlined"
+                  variant="standard"
                   type="text"
                   value={subTotal || ""}
                   fullWidth
@@ -846,26 +896,29 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
 
       <br />
 
-      <Autocomplete
-        options={dataResponseRegisters}
-        getOptionLabel={(option) => option.description}
-        value={selectedProduct}
-        onChange={(_, newValue) => setSelectedProduct(newValue)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search product by description"
-            variant="outlined"
-            fullWidth
-            //value={searchTerm}
-            value={typevalue === 'View' ? null : selectedProduct}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            //onChange={(e) => setSearchResults(e.target.value)}
-            //disabled={isAutocompleteDisabled}
-            style={{ display: isAutocompleteDisabled ? 'none' : 'block' }}
-          />
-        )}
-      />
+      <Grid item xs={6} style={{ width: '50%' }}>
+        <Autocomplete
+          options={dataResponseRegisters}
+          getOptionLabel={(option) => option.description}
+          value={selectedProduct}
+          onChange={(_, newValue) => setSelectedProduct(newValue)}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="🧺 Search product by description"
+              variant="standard"
+              fullWidth
+              //value={searchTerm}
+              value={typevalue === 'View' ? null : selectedProduct}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              //onChange={(e) => setSearchResults(e.target.value)}
+              //disabled={isAutocompleteDisabled}
+              style={{ display: isAutocompleteDisabled ? 'none' : 'block' }}
+            />
+          )}
+        /> 
+      </Grid>
+ 
       {/* <Button variant="contained" color="primary" onClick={handleSearch}>
         Search
       </Button> */}
@@ -881,7 +934,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
       <br />
       <div style={{ marginTop: '20px' }}>
         <Typography variant="h6" gutterBottom>
-          Product list
+        🛒 Product list
         </Typography>
         <TableContainer component={Paper}>
           <Table>
@@ -898,7 +951,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
               {typevalue === 'View'
                 ? filteredData.map((product) => (
                   // <TableRow key={product.productId}>
-                  <TableRow key={product.id}>  
+                  <TableRow key={product.id}>
                     <TableCell>{product.productId}</TableCell>
                     <TableCell>{product.description}</TableCell>
                     <TableCell>{product.price}</TableCell>
