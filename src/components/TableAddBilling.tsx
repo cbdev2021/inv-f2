@@ -1013,7 +1013,7 @@ const TableAddBilling: FunctionComponent<TableConfigProps> = ({
         }}
 
       >
-        Generar Factura
+        Generate Invoice
       </Button>
 
       <Dialog open={confirmAddDialogOpen} onClose={cancelAddToCart}>
