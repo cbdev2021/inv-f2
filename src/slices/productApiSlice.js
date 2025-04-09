@@ -78,10 +78,27 @@ export const typeValuesApiSlice = apiSlice.injectEndpoints({
       },
     }),
 
+    // updateProductAmount: builder.mutation({
+    //   query: (object) => {
+    //     const apiUrl = `${TYPE_VALUES_URL}/update-product-amount/${object.productId}`;
+    //     console.log("update object:", object);
+
+    //     return {
+    //       url: apiUrl,
+    //       method: 'PUT',
+    //       body: object.registro,
+    //       headers: {
+    //         Authorization: `Bearer ${object.token}`,
+    //       },
+    //     };
+    //   },
+    // }),
+
     updateProductAmount: builder.mutation({
       query: (object) => {
-        const apiUrl = `${TYPE_VALUES_URL}/update-product-amount/${object.productId}`;
-        console.log("update object:", object);
+        // const apiUrl = `${TYPE_VALUES_URL}/update-product-amount/${object.registro.productId}`;
+        const apiUrl = `${TYPE_VALUES_URL}/update-product-amount/${object.registro.productId}`;
+        console.log("update object:", object.registro);
 
         return {
           url: apiUrl,
@@ -93,6 +110,8 @@ export const typeValuesApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+
+
   }),
 });
 
